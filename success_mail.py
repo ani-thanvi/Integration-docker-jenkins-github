@@ -1,4 +1,4 @@
-  import smtplib 
+        import smtplib 
 
 	# creates SMTP session 
 	s = smtplib.SMTP('smtp.gmail.com', 587) 
