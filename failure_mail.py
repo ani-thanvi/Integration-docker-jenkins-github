@@ -1,13 +1,20 @@
-import smtplib 
-# creates SMTP session 
-s = smtplib.SMTP('smtp.gmail.com', 587) 
-# start TLS for security 
-s.starttls()   
-# Authentication 
-s.login("sender-mail", "password") 
-# message to be sent 
-message = "Hey Developer, you need to check your code once. Might be this have some error. "
-# sending the mail 
-s.sendmail("sender-mail", "developer_mail", message) 
-# terminating the session 
-s.quit()
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+host_address="***@gmail.com"
+host_pass="***"
+guest_address="***@gmail.com"
+subject="Fail"
+content="Fail"
+message = MIMEMultipart()
+message['From']=host_address
+message['To']=guest_address
+message['Subject']=subject
+message.attach(MIMEText(content,'plain'))
+session= smtplib.SMTP('smtp.gmail.com',587)
+session.starttls()
+session.login(host_address,host_pass)
+text=message.as_string()
+session.sendmail(host_address,guest_address,text)
+session.quit()
+print("Mail failed")
